@@ -9,6 +9,10 @@ const cors = require('cors');
 const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 
+// Swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger');
+
 //connect DB
 const connectDB = require('./db/connect');
 
@@ -32,6 +36,9 @@ app.use(
         max: 100, // limit each IP to 100 requests per windowMs
     })
 );
+
+// Swagger UI
+app.use('/swagger_doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/jobs', authenticationMiddleware, jobsRouter);
