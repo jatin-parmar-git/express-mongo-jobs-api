@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  pocexpressappjobsapi:
+    image: node:24-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+      # - /app/node_modules  # Prevent host node_modules from overwriting container's
+    command: sleep infinity
+    stdin_open: true
+    tty: true
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
